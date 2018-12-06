@@ -30,7 +30,7 @@ class linked_list:
 		print(elems)
 
 elems = []
-def addNumbers(cur1,cur2):
+def carry(cur1,cur2):
 	sum = cur1.data + cur2.data
 	#if last node
 	if cur1.next == None:
@@ -43,13 +43,42 @@ def addNumbers(cur1,cur2):
 
 	#if not the last node
 	if cur1.next !=None:
-		value = sum + addNumbers(cur1.next,cur2.next)
+		value = sum + carry(cur1.next,cur2.next)
 		last_digit = value%10
 		elems.append(last_digit)
 		if(value>=10):
 			#carry
 			return 1
 		return 0
+
+def addNumbers(mylist1,mylist2):
+	if mylist1.length() == mylist2.length():
+		#when sizes are same
+		cur1 = mylist1.head
+		cur2 = mylist2.head
+		cur1 = cur1.next
+		cur2 = cur.next
+		value = carry(cur1,cur2)
+		if value == 1:
+			elems.append(value)
+		return elems
+	else:
+		#when sizes are different
+		cur1 = mylist1.head
+		cur2 = mylist2.head
+		diff = abs(mylist1.length() - mylist2.length())
+		if mylist1.length()>mylist2.length():
+			for i in range(0,diff):
+				cur1 = cur1.next
+			cur1 = cur1.next
+			cur2 = cur2.next
+		if mylist2.length()>mylist1.length():
+			for i in range(0,diff):
+				cur2 = cur2.next
+			cur2 = cur2.next
+			cur1 = cur1.next
+		value = carry(cur1,cur2)
+			
 
 
 mylist1 = linked_list()
@@ -64,11 +93,8 @@ mylist2.append(8)
 mylist2.append(4)
 mylist2.append(2)
 mylist2.append(9)
-cur1 = mylist1.head
-cur2 = mylist2.head
-value = addNumbers(cur1.next,cur2.next)
-if value == 1:
-	elems.append(value)
+
+elems = addNumbers(mylist1,mylist2)
 print(elems[::-1])
 
 
